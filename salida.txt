@@ -1,0 +1,28 @@
+Token: programa
+Token: variables
+Token: definir
+Token: Identificador	lexema: total
+.Token: definir
+Token: Identificador	lexema: var1
+.Token: definir
+Token: Identificador	lexema: var2
+.Token: codigo
+Token: leer
+(Token: Identificador	lexema: var1
+,Token: Identificador	lexema: var2
+).Error Léxico:	 Cadena desconocida: ##
+Token: Identificador	lexema: total
+Token: <-
+Token: Identificador	lexema: var1
++Token: Constante	lexema: 3
+*-Token: Identificador	lexema: var2
+.Token: Identificador	lexema: var2
+Token: <-
+Token: Constante	lexema: 2
+*(Token: Constante	lexema: 514
++Error Léxico:	constante inválida:: 4z
+Error Léxico:	constante inválida:: 2m)
+.Token: escribir
+(Error Léxico:	 Identificador inválido: total#3a@/2).
+Error Léxico:	 Cadena desconocida: <
+Token: fin
