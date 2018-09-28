@@ -1,0 +1,49 @@
+Token: Programa
+Token: Variables
+Token: Definir
+Token: Identificador	lexema: total
+Token: '.'
+Token: Definir
+Token: Identificador	lexema: var1
+Token: '.'
+Token: Definir
+Token: Identificador	lexema: var2
+Token: '.'
+Token: Código
+Token: Leer
+Token: '('
+Token: Identificador	lexema: var1
+Token: ','
+Token: Identificador	lexema: var2
+Token: ')'
+Token: '.'
+Error léxico: cadena desconocida: ##
+Token: Identificador	lexema: total
+Token: Asignación
+Token: Identificador	lexema: var1
+Token: '+'
+Token: Constante	lexema: 3
+Token: '*'
+Token: '-'
+Token: Identificador	lexema: var2
+Token: '.'
+Token: Identificador	lexema: var2
+Token: Asignación
+Token: Constante	lexema: 2
+Token: '*'
+Token: '('
+Token: Constante	lexema: 514
+Token: '+'
+Error léxico: constante inválida: 4z2m
+Token: ')'
+Token: '.'
+Token: Escribir
+Token: '('
+Error léxico: identificador inválido: total#3a@
+Token: '/'
+Token: Constante	lexema: 2
+Token: ')'
+Token: '.'
+Error léxico: cadena desconocida: <
+Token: Fin
+Token: Fin de Archivo
