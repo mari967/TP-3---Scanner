@@ -14,14 +14,14 @@ LD [[:alnum:]]
 OTRO  [[:^alnum:]]{-}[[:space:]]{-}[\+\-\*\/\(\)\.\,]
 CUALQUIERA [[:^space:]]{-}[\+\-\*\/\(\)\.\,]
 S  [[:space:]]
-CONSERR [[:^digit:]]{-}[[:space:]]
+CONSERR [[:^digit:]]{-}[[:space:]]{-}[\+\-\*\/\(\)\.\,]
 %%
 "<-"		return ASIGNACION;
 {D}+		return CONSTANTE;
-'+'		return '+';
-'-'		return '-';
-'*'		return '*';
-'\/'		return '/';
+"+"		return MAS;
+"-"		return MENOS;
+"*"		return MULTIPLICACION;
+"/"		return DIVISION;
 "programa"	return PROGRAMA;
 "variables"	return VARIABLE;
 "definir"	return DEFINIR;
@@ -29,14 +29,14 @@ CONSERR [[:^digit:]]{-}[[:space:]]
 "leer"		return LEER;
 "escribir"	return ESCRIBIR;
 "fin"		return FIN;
-'\('		return '(';
-'\)'		return ')';
-'\.'		return '.';
-'\,'		return ',';
+"("		return PARENIZQ;
+")"		return PARENDER;
+"."		return PUNTO;
+","		return COMA;
 {L}{LD}*	return IDENTIFICADOR;
 "//".*		;
-{OTRO}+{CUALQUIERA}*   	printf("Error Léxico:\t Cadena desconocida: %s\n", yytext);
-{L}{LD}*{OTRO}+{CUALQUIERA}*	printf("Error Léxico:\t Identificador inválido: %s\n", yytext);
-{D}+{CONSERR}+{CUALQUIERA}*	printf("Error Léxico:\tconstante inválida: %s\n", yytext);
+{OTRO}+{CUALQUIERA}*   	printf("Error Léxico:\t\t Cadena desconocida: %s\n", yytext);
+{L}{LD}*{OTRO}+{CUALQUIERA}*	printf("Error Léxico:\t\t Identificador inválido: %s\n", yytext);
+{D}+{CONSERR}+{CUALQUIERA}*	printf("Error Léxico:\t\tconstante inválida: %s\n", yytext);
 {S}+    	;
 %%
