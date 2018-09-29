@@ -3,7 +3,7 @@ Trabajo práctco N° 3
 Grupo  10
 Cervantes Marisol, 1639201
 Lodeiros Ayrton, 1646473
-Nishisaka Matías, 
+Nishizaka Matías, 1634483
 Rey Gastσn, 1561674*/
 
 
@@ -11,7 +11,7 @@ Rey Gastσn, 1561674*/
 #include <stdio.h>
 #include "scanner.h"
 
-char *token_names[] = {"", "Asignación", "Constante", "Programa", "Variable", "Definir", "Código", "Leer", "Escribir", "Fin", "Identificador", "'('", "')'", "'.'", "','", "'+'", "'-'", "'*'", "'/'"};
+char *token_names[] = {"", "Asignación", "Constante", "Programa", "Variables", "Definir", "Código", "Leer", "Escribir", "Fin", "Identificador", "'('", "')'", "'.'", "','", "'+'", "'-'", "'*'", "'/'"};
 
 
 int main () {
