@@ -20,9 +20,9 @@ Token: Identificador	lexema: var1
 Token: <-
 Token: Constante	lexema: 2
 *(Token: Constante	lexema: 514
-+Error Léxico:	constante inválida:: 4z
-Error Léxico:	constante inválida:: 2m)
-.Token: escribir
-(Error Léxico:	 Identificador inválido: total#3a@/2).
++Error Léxico:	constante inválida: 4z2m
+).Token: escribir
+(Error Léxico:	 Identificador inválido: total#3a@
+/Error Léxico:	constante inválida: 2).
 Error Léxico:	 Cadena desconocida: <
 Token: fin

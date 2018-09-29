@@ -12,7 +12,7 @@ D  [0-9]
 L  [[:alpha:]]
 LD [[:alnum:]]
 OTRO  [[:^alnum:]]{-}[[:space:]]{-}[\+\-\*\/\(\)\.\,]
-CUALQUIERA [[:^space:]]
+CUALQUIERA [[:^space:]]{-}[\+\-\*\/\(\)\.\,]
 S  [[:space:]]
 CONSERR [[:^digit:]]{-}[[:space:]]
 %%
@@ -37,6 +37,6 @@ CONSERR [[:^digit:]]{-}[[:space:]]
 "//".*		;
 {OTRO}+{CUALQUIERA}*   	printf("Error Léxico:\t Cadena desconocida: %s\n", yytext);
 {L}{LD}*{OTRO}+{CUALQUIERA}*	printf("Error Léxico:\t Identificador inválido: %s\n", yytext);
-{D}+{CONSERR}+	printf("Error Léxico:\tconstante inválida:: %s\n", yytext);
+{D}+{CONSERR}+{CUALQUIERA}*	printf("Error Léxico:\tconstante inválida: %s\n", yytext);
 {S}+    	;
 %%
