@@ -11,7 +11,7 @@ Rey Gastσn, 1561674*/
 #include <stdio.h>
 #include "scanner.h"
 
-char *token_names[] = {"", "Asignación", "Constante", "Programa", "Variables", "Definir", "Código", "Leer", "Escribir", "Fin", "Identificador", "'('", "')'", "'.'", "','", "'+'", "'-'", "'*'", "'/'"};
+char *token_names[] = {"", "Asignación", "Constante", "Programa", "Variables", "Definir", "Código", "Leer", "Escribir", "Fin", "Identificador"};
 
 
 int main () {
