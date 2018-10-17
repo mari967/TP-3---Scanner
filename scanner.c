@@ -1,6 +1,6 @@
 #line 2 "scanner.c"
 #include <stdio.h>
-#include "tokens.h"
+#include "parser.h"
 
 #line 6 "scanner.c"
 
@@ -854,7 +854,7 @@ return PROGRAMA;
 case 8:
 YY_RULE_SETUP
 #line 25 "scanner.l"
-return VARIABLE;
+return VARIABLES;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP

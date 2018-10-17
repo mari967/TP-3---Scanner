@@ -1,6 +1,6 @@
 %top{
 #include <stdio.h>
-#include "tokens.h"
+#include "parser.h"
 }
 
 %option outfile="scanner.c"
@@ -22,7 +22,7 @@ S  [[:space:]]
 "*"		return '*';
 "/"		return '/';
 "programa"	return PROGRAMA;
-"variables"	return VARIABLE;
+"variables"	return VARIABLES;
 "definir"	return DEFINIR;
 "codigo"	return CODIGO;
 "leer"		return LEER;

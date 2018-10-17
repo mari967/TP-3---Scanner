@@ -11,6 +11,7 @@ Rey Gastσn, 1561674*/
 #include <stdio.h>
 #include <ctype.h>
 #include "scanner.h"
+#include "parser.h"
 
 char *token_names[] = {"Fin de archivo", "Asignación", "Constante", "Programa", "Variables", "Definir", "Código", "Leer", "Escribir", "Fin", "Identificador"};
 

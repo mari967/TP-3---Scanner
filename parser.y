@@ -8,8 +8,8 @@ extern int yylexerrs;
 }
 %defines "parser.h"
 %output "parser.c"
-%define noinput
-%option nounput
+//%define noinput
+//%define nounput
 %define api.value.type {char *}
 %define parse.error verbose
 
@@ -24,17 +24,17 @@ programa		: PROGRAMA VARIABLES listaVariables CODIGO listaSentencias FIN
 listaVariables		: listaVariables variable
 			| /*epsilon*/
 			;
-variable		: DEFINIR identificador '.'
+variable		: DEFINIR IDENTIFICADOR '.' {printf("definir %s", $IDENTIFICADOR);}
 			;
 listaSentencias		: listaSentencias sentencia
 			| sentencia
 			;
 sentencia		: LEER '(' listaIdentificadores ')' '.' 
-			| identificador ASIGNACION expresion '.' 
+			| IDENTIFICADOR ASIGNACION expresion '.' 
 			| ESCRIBIR '(' listaExpresiones ')' '.' 
 			;
-listaIdentificadores 	: listaIdentificadores ',' identificador 
-			| identificador
+listaIdentificadores 	: listaIdentificadores ',' IDENTIFICADOR 
+			| IDENTIFICADOR
 			;
 listaExpresiones	: listaExpresiones ',' expresion
 			| expresion
@@ -44,9 +44,10 @@ expresion		: expresion '+' expresion
 			: expresion '*' expresion
 			| expresion '/' expresion 
 			| primaria
-			;
 			| '-' primaria %prec NEGATIVO
-primaria		| IDENTIFICADOR
+			;
+
+primaria		: IDENTIFICADOR
 			| CONSTANTE
 			| '(' expresion ')'
 			; 
