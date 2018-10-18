@@ -34,8 +34,8 @@ S  [[:space:]]
 ","		return ',';
 {L}{LD}*	return IDENTIFICADOR;
 "//".*		;
-{OTRO}+   	printf("Error Léxico:\t\t Cadena desconocida: %s\n", yytext);
-{L}{LD}*{CUALQUIERA}+	printf("Error Léxico:\t\t Identificador inválido: %s\n", yytext);
-{D}+{LD}+	printf("Error Léxico:\t\t Constante inválida: %s\n", yytext);
+{OTRO}+   	yyerror("Error Léxico:\t\t Cadena desconocida: yytext\n");
+{L}{LD}*{CUALQUIERA}+	yyerror("Error Léxico:\t\t Identificador inválido: yytext\n");
+{D}+{LD}+	yyerror("Error Léxico:\t\t Constante inválida: yytext\n");
 {S}+    	;
 %%

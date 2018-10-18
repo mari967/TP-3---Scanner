@@ -76,7 +76,8 @@ int yyparse (void);
 
 void yyerror(const char *);
 extern int yylexerrs;
+char *buffer;
 
-#line 81 "parser.h" /* yacc.c:1909  */
+#line 82 "parser.h" /* yacc.c:1909  */
 
 #endif /* !YY_YY_PARSER_H_INCLUDED  */

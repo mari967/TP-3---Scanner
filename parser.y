@@ -5,6 +5,7 @@
 %code provides{
 void yyerror(const char *);
 extern int yylexerrs;
+char *buffer;
 }
 %defines "parser.h"
 %output "parser.c"
@@ -41,18 +42,17 @@ listaExpresiones	: listaExpresiones ',' expresion
 			;
 expresion		: expresion '+' expresion
 			| expresion '-' expresion
-			: expresion '*' expresion
+			| expresion '*' expresion
 			| expresion '/' expresion 
-			| expresion
 			| '-' expresion %prec NEGATIVO
 			| '(' expresion ')'
 			| IDENTIFICADOR
 			| CONSTANTE
 			;
-
 %%
 
+buffer = malloc(200);
 void yyerror(const char *s){
 	printf("línea #%d: %s\n", yylineno, s);
-	return;
+	//return;
 }
