@@ -43,14 +43,13 @@ expresion		: expresion '+' expresion
 			| expresion '-' expresion
 			: expresion '*' expresion
 			| expresion '/' expresion 
-			| primaria
-			| '-' primaria %prec NEGATIVO
+			| expresion
+			| '-' expresion %prec NEGATIVO
+			| '(' expresion ')'
+			| IDENTIFICADOR
+			| CONSTANTE
 			;
 
-primaria		: IDENTIFICADOR
-			| CONSTANTE
-			| '(' expresion ')'
-			; 
 %%
 
 void yyerror(const char *s){
