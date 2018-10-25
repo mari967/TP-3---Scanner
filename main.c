@@ -9,22 +9,20 @@ Rey Gastσn, 1561674*/
 
 
 #include <stdio.h>
-#include <ctype.h>
-#include "scanner.h"
 #include "parser.h"
-
-char *token_names[] = {"Fin de archivo", "Asignación", "Constante", "Programa", "Variables", "Definir", "Código", "Leer", "Escribir", "Fin", "Identificador"};
 
 
 int main () {
-
-enum tokens t;
-while ( (t = yylex()) ) { 
-if (t == IDENTIFICADOR || t == CONSTANTE)
-printf("Token: %s\tlexema: %s\n", token_names[t], yytext);
-else if (t >= '(')
-	printf("Token:  '%c'\n",t);
-else printf("Token: %s\n", token_names[t]);
-	}
-printf("Token: %s", token_names[t]);
+printf("\n--------------------------------");
+switch( yyparse() ) {
+		case 0: printf("\n\nCompilación terminada con éxito");
+			break;		
+		case 1: printf("\n\nErrores de compilación");
+			break;
+		case 2: printf("\n\nNo hay memoria suficiente");
+			break;		
+		}
+printf("\nErrores sintácticos:  %i\t - Errores lexicos:  %i\n", yynerrs, yylexerrs);
+printf("--------------------------------\n\n");
+return 0;
 }
