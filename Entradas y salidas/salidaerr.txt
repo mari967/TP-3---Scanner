@@ -1,0 +1,14 @@
+definir total
+definir var1
+definir var2
+definir var2
+línea #7: Error léxico: cadena desconocida: ##@
+línea #7: syntax error, unexpected '.', expecting ID
+leer
+línea #10: Error léxico: constante con sufijo inválido: 32z
+línea #10: syntax error, unexpected '*', expecting ID or CONSTANTE or '-' or '('
+línea #11: Error léxico: identificador inválido: var2#2@1
+división
+escribir
+Errores de compilación
+Errors sintácticos: 2 - Errores léxicos: 3

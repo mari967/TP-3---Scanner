@@ -1,0 +1,16 @@
+definir total
+definir var1
+definir var2
+leer
+inversión
+multiplicación
+suma
+asignación
+suma
+paréntesis
+multiplicación
+asignación
+división
+escribir
+Compilación terminada con éxito
+Errors sintácticos: 0 - Errores léxicos: 0
