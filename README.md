@@ -7,6 +7,16 @@ Scanner, parser, compilador, usando flex y bison
 *****************************************************************************************************
 
 
+## TP 0: Un escáner elemental
+
+[Escáner que reconoce constantes e identificadores](https://github.com/mari967/TP0-Scanner "TP0 en github")
+
+*TP aprobado el 24/06/2018*
+
+
+*****************************************************************************************************
+
+
 ## TP 1: BNF léxica del lenguaje mini
 
 [BNF de la gramática léxica del lenguaje mini](https://docs.google.com/document/d/1fIR2U-Uh80MAHeovVEe_INCjC02yckCTc2pPF_TzYuc/edit?usp=sharing "BNF léxica (Google docs)")
