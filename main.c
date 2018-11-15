@@ -10,7 +10,7 @@ Rey Gastσn, 1561674*/
 
 #include <stdio.h>
 #include "parser.h"
-
+#include "semantic.h"
 
 int main () {
 printf("\n--------------------------------");
@@ -22,7 +22,7 @@ switch( yyparse() ) {
 		case 2: printf("\n\nNo hay memoria suficiente");
 			break;		
 		}
-printf("\nErrores sintácticos:  %i\t - Errores lexicos:  %i\n", yynerrs, yylexerrs);
+printf("\nErrores semánticos;  %i\t - Errores sintácticos:  %i\t - Errores lexicos:  %i\n",erroresSemanticos, yynerrs, yylexerrs);
 printf("--------------------------------\n\n");
 return 0;
 }

@@ -1,6 +1,8 @@
 %code top{
 #include <stdio.h>
 #include "scanner.h"
+#include "semantic.h"
+
 }
 %code provides{
 void yyerror(const char *);
@@ -22,38 +24,40 @@ extern int yylexerrs;
 
 %%
 
-todo			: programa	{ if (yynerrs || yylexerrs) YYABORT;}
+todo			: programa	{ if (yynerrs || yylexerrs) YYABORT; else YYACCEPT; terminar();}
 			;
-programa		: PROGRAMA VARIABLES listaVariables CODIGO listaSentencias FIN
+programa		: PROGRAMA VARIABLES listaVariables CODIGO listaSentencias FIN {comenzar();}
 			;
 listaVariables		: listaVariables variable
 			| /*epsilon*/
 			;
-variable		: DEFINIR IDENTIFICADOR '.' 			{printf("\ndefinir %s", $IDENTIFICADOR);}
+variable		: DEFINIR IDENTIFICADOR '.' 			{declarar();}
 			| error '.'
 			;
 listaSentencias		: listaSentencias sentencia
 			| sentencia
 			;
-sentencia		: LEER '(' listaIdentificadores ')' '.' 	{printf("\nleer");}
-			| IDENTIFICADOR ASIGNACION expresion '.' 	{printf("\nasignación");}
-			| ESCRIBIR '(' listaExpresiones ')' '.'  	{printf("\nescribir");}
+sentencia		: LEER '(' listaIdentificadores ')' '.' 	{leer();}
+			| identificador ASIGNACION expresion '.' 	{asignar($1, $3);}
+			| ESCRIBIR '(' listaExpresiones ')' '.'  	{escribir();}
 			| error '.'
 			;
-listaIdentificadores 	: listaIdentificadores ',' IDENTIFICADOR 
-			| IDENTIFICADOR
+listaIdentificadores 	: listaIdentificadores ',' identificador 
+			| identificador
 			;
 listaExpresiones	: listaExpresiones ',' expresion
 			| expresion
 			;
-expresion		: expresion '+' expresion  			{printf("\nsuma");}
-			| expresion '-' expresion			{printf("\nresta");}
-			| expresion '*' expresion  			{printf("\nmultiplicación");}
-			| expresion '/' expresion  			{printf("\ndivisión");}
-			| '-' expresion %prec NEGATIVO  		{printf("\ninversión");}
-			| '(' expresion ')'				{printf("\nparéntesis");}
-			| IDENTIFICADOR
+expresion		: expresion '+' expresion  			{$$ = generarInfijo($1,'+', $3);}
+			| expresion '-' expresion			{$$ = generarInfijo($1,'-', $3);}
+			| expresion '*' expresion  			{$$ = generarInfijo($1,'*', $3);}
+			| expresion '/' expresion  			{$$ = generarInfijo($1,'/', $3);}
+			| '-' expresion %prec NEGATIVO  		{$$ = generarUnario($1, '-');}
+			| '(' expresion ')'				
+			| identificador
 			| CONSTANTE
+			;
+identificador		: IDENTIFICADOR					{procesarId();}
 			;
 %%
 int yylexerrs = 0;
@@ -62,3 +66,5 @@ void yyerror(const char *s){
 	printf("\nlínea #%d: %s", yylineno, s);
 	//return;
 }
+
+
