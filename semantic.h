@@ -1,8 +1,8 @@
 #ifndef SEMANTIC_H_INCLUDED
 #define SEMANTIC_H_INCLUDED
+#define dim 100
 
-
-const int dim = 100;
+//const int dim = 100;
 char* TS [dim];
 int i = 0;
 int erroresSemanticos = 0;
