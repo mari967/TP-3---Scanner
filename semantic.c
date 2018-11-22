@@ -75,7 +75,7 @@ int declarar (char * id) {
 
 
 void asignar(char* a, char* b) {
-	generar("STORE", a, b, "Integer");
+	generar("STORE", a, b, "");
 }
 
 
