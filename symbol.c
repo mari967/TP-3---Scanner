@@ -4,6 +4,9 @@
 #include "parser.h"
 #include "symbol.h"
 
+char * TS [dim];
+int proximoLugarLibre = 0;
+
 
 int chequear(char* cadena) {	//Suponiendo que la tabla se símbolos almacena structs
 	if(!buscar(cadena)) {
@@ -15,17 +18,17 @@ int chequear(char* cadena) {	//Suponiendo que la tabla se símbolos almacena str
 
 int buscar(char * cadena)
 {
-	for (int i = 0; i < dim; i++)
-		if (TS[i] == cadena)
+	for (int i = 0; i < proximoLugarLibre; i++)
+		if (!strcmp(TS[i], cadena)) //Devuelve 0 si son iguales
 			return 1;
 	return 0;
 }
 
 
 void colocar (char* cadena) {
-	if (i < 100) {
-	TS[i] = cadena;
-	i++;
+	if (proximoLugarLibre < 100) {
+	TS[proximoLugarLibre] = cadena;
+	proximoLugarLibre++;
 	}	
 	else printf("Se acabó la memoria");
 }
@@ -33,5 +36,10 @@ void colocar (char* cadena) {
 
 
 void generar (char * codigo, char * a, char * b, char * c) {
-	printf("%s %s, %s, %s\n", codigo, a, b, c);
+	if (!strcmp(codigo,"STOP"))
+		printf("\n%s ", codigo);
+	else if (!strcmp(b,""))
+		printf("\n%s %s, %s", codigo, a, c);
+		else printf("\n%s %s, %s, %s", codigo, a, b, c);
+	
 }

@@ -22,7 +22,7 @@ switch( yyparse() ) {
 		case 2: printf("\n\nNo hay memoria suficiente");
 			break;		
 		}
-printf("\nErrores semánticos;  %i\t - Errores sintácticos:  %i\t - Errores lexicos:  %i\n",erroresSemanticos, yynerrs, yylexerrs);
+printf("\nErrores semánticos:  %i\t - Errores sintácticos:  %i\t - Errores lexicos:  %i\n",erroresSemanticos, yynerrs, yylexerrs);
 printf("--------------------------------\n\n");
 return 0;
 }

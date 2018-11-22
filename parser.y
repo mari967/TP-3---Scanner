@@ -9,6 +9,7 @@ void yyerror(const char *);
 
 extern int yynerrs;
 extern int yylexerrs;
+extern int erroresSemanticos;
 }
 %defines "parser.h"
 %output "parser.c"
@@ -24,47 +25,46 @@ extern int yylexerrs;
 
 %%
 
-todo			: programa	{ if (yynerrs || yylexerrs) YYABORT; else YYACCEPT; terminar();}
+todo			: programa	{if (yynerrs || yylexerrs || erroresSemanticos) YYABORT; else YYACCEPT;}
 			;
-programa		: PROGRAMA VARIABLES listaVariables CODIGO listaSentencias FIN {comenzar();}
+programa		: {comenzar();} PROGRAMA VARIABLES listaVariables CODIGO listaSentencias FIN {terminar();}
 			;
 listaVariables		: listaVariables variable
 			| /*epsilon*/
 			;
-variable		: DEFINIR IDENTIFICADOR '.' 			{declarar();}
+variable		: DEFINIR IDENTIFICADOR '.' 			{if(declarar($2)) YYERROR;}
 			| error '.'
 			;
 listaSentencias		: listaSentencias sentencia
 			| sentencia
 			;
-sentencia		: LEER '(' listaIdentificadores ')' '.' 	{leer();}
+sentencia		: LEER '(' listaIdentificadores ')' '.' 	
 			| identificador ASIGNACION expresion '.' 	{asignar($1, $3);}
-			| ESCRIBIR '(' listaExpresiones ')' '.'  	{escribir();}
+			| ESCRIBIR '(' listaExpresiones ')' '.'  	
 			| error '.'
 			;
-listaIdentificadores 	: listaIdentificadores ',' identificador 
-			| identificador
+listaIdentificadores 	: listaIdentificadores ',' identificador 	{leer($3);}
+			| identificador					{leer($1);}
 			;
-listaExpresiones	: listaExpresiones ',' expresion
-			| expresion
+listaExpresiones	: listaExpresiones ',' expresion		{escribir($3);}
+			| expresion					{escribir($1);}
 			;
 expresion		: expresion '+' expresion  			{$$ = generarInfijo($1,'+', $3);}
 			| expresion '-' expresion			{$$ = generarInfijo($1,'-', $3);}
 			| expresion '*' expresion  			{$$ = generarInfijo($1,'*', $3);}
 			| expresion '/' expresion  			{$$ = generarInfijo($1,'/', $3);}
-			| '-' expresion %prec NEGATIVO  		{$$ = generarUnario($1, '-');}
+			| '-' expresion %prec NEGATIVO  		{$$ = generarUnario($2, '-');}
 			| '(' expresion ')'				
 			| identificador
 			| CONSTANTE
 			;
-identificador		: IDENTIFICADOR					{procesarId();}
+identificador		: IDENTIFICADOR					{if(procesarID($1)) YYERROR;}
 			;
 %%
 int yylexerrs = 0;
 
 void yyerror(const char *s){
 	printf("\nlínea #%d: %s", yylineno, s);
-	//return;
 }
 
 

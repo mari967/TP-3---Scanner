@@ -1,18 +1,13 @@
 #ifndef SEMANTIC_H_INCLUDED
 #define SEMANTIC_H_INCLUDED
 
-int erroresSemanticos = 0;
-char buffer2[200];
-char temporal[50];
-int cantTemporales = 1;
-
 char* generarInfijo (char* a, char operador, char* b);
 char* generarUnario (char* a, char operador);
-void procesarId ();
+int procesarID (char * id);
 void comenzar();
-void leer();
-void escribir();
-void declarar();
+void leer(char* a);
+void escribir(char* a);
+int declarar(char * id);
 void asignar(char* a, char* b);
 void terminar();
 

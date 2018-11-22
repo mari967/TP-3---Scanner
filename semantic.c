@@ -5,57 +5,71 @@
 #include "parser.h"
 #include "symbol.h"
 
+int erroresSemanticos = 0;
+char buffer2[200];
+char temporal[50];
+int cantTemporales = 1;
 
 
-void procesarID() {
-	if (!buscar(yytext)) {
-		sprintf(buffer2,"Error semantico: identificador %s no declarado", yytext);
+int procesarID(char * id) {
+	if (!buscar(id)) {
+		sprintf(buffer2,"Error semantico: identificador %s no declarado", id);
 		erroresSemanticos++;
 		yyerror(buffer2);
-		YYERROR;
+		return 1;
 		}	
+	return 0;
 }
 
 
 char* generarInfijo (char* a, char operador, char* b) {
-	switch (operador) {
+	char * temp;
 	sprintf(temporal, "temp#%d",cantTemporales);
-	case '+': generar("ADD", a, b, temporal); cantTemporales++; break;
-	case '*': generar("MULT", a, b, temporal); cantTemporales++; break;
-	case '-': generar("SUBS", a, b, temporal); cantTemporales++; break;
-	case '/': generar("DIV", a, b, temporal); cantTemporales++; break;
+	cantTemporales++;
+	temp = strdup(temporal);
+	declarar(temp);
+	
+	switch (operador) {	
+	case '+': generar("ADD", a, b, temporal); break;
+	case '*': generar("MULT", a, b, temporal); break;
+	case '-': generar("SUBS", a, b, temporal); break;
+	case '/': generar("DIV", a, b, temporal); break;
 	}
-	return temporal;
+	return temp;
 }
 
 char* generarUnario (char* a, char operador) {
-	sprintf(temporal, "temp#%d",cantTemporales);
-	generar("INV", a, "", temporal); 
+	char * temp;
+	sprintf(temporal, "temp#%d",cantTemporales); 
 	cantTemporales++;
-	return temporal;
+	temp = strdup(temporal);
+	declarar(temp);
+	generar("INV", a, "", temporal);
+	return temp;
 }
 
 void comenzar(void) {
 	generar("Load","rtlib","","");
 }
 
-void leer() {
-	generar("READ", yytext, "","Integer");
+void leer(char* a) {
+	generar("READ", a, "","Integer");
 }
 
-void escribir () {
-	generar("WRITE", yytext, "", "Integer");
+void escribir (char* a) {
+	generar("WRITE", a, "", "Integer");
 }
 
-void declarar (void) {//Es necesria la palabra struct?
-	if(chequear(yytext))						//Revisar si está en la TS
-		generar("Declare",yytext, ", Integer", " ");
-		
+int declarar (char * id) {
+	if(chequear(id)) { //Chequear devuelve 1 si no estaba y tuvo que agregarlo						//Revisar si está en la TS
+		generar("Declare",id, "", "Integer");
+		return 0;
+		}
 	else {	
-		sprintf(buffer2,"Error semantico: identificador %s ya declarado", yytext);
+		sprintf(buffer2,"Error semantico: identificador %s ya declarado", id);
 		erroresSemanticos++;
 		yyerror(buffer2);
-		YYERROR;
+		return 1;
 		}
 }
 

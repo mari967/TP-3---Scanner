@@ -78,7 +78,8 @@ void yyerror(const char *);
 
 extern int yynerrs;
 extern int yylexerrs;
+extern int erroresSemanticos;
 
-#line 83 "parser.h" /* yacc.c:1909  */
+#line 84 "parser.h" /* yacc.c:1909  */
 
 #endif /* !YY_YY_PARSER_H_INCLUDED  */
