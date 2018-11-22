@@ -39,7 +39,7 @@ listaSentencias		: listaSentencias sentencia
 			| sentencia
 			;
 sentencia		: LEER '(' listaIdentificadores ')' '.' 	
-			| identificador ASIGNACION expresion '.' 	{asignar($1, $3);}
+			| identificador ASIGNACION expresion '.' 	{asignar($3, $1);}
 			| ESCRIBIR '(' listaExpresiones ')' '.'  	
 			| error '.'
 			;
