@@ -1,4 +1,4 @@
-# Trabajos prácticos de Sintaxis y semántica de los lenguajes 
+# TPs de Sintaxis y semántica de los lenguajes 
 ### UTN FRBA - ING. EN SISTEMAS DE INFORMACIÓN
 #### Prof. Eduardo Zuñiga
 Scanner, parser, compilador, usando flex y bison
